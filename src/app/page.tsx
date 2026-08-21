@@ -17,7 +17,7 @@ export default function DashboardPage() {
   const active = data.employees.filter(e => e.status === "Active").length;
   const onLeave = data.employees.filter(e => e.status === "On Leave").length;
   const pending = data.leaves.filter(l => l.status === "Pending").length;
-  const run = data.payrolls.find(p => p.month === 8)!;
+  const run = data.payrolls.slice().sort((a, b) => b.year - a.year || b.month - a.month)[0];
   const paidYTD = data.payrolls.filter(p => p.status === "Paid")
     .reduce((s, p) => s + p.items.reduce((a, i) => a + i.net, 0), 0);
 
@@ -61,23 +61,23 @@ export default function DashboardPage() {
 
           <div>
             <div className="card-h" style={{ padding: "0 0 12px", border: 0 }}>
-              <div><h3>August 2026 payroll</h3>
-                <div className="sub">{run.items.length} people · cut-off 25 Aug · pay 31 Aug</div></div>
-              <Link className="btn pri sm" href="/payroll">Open run</Link>
+              <div><h3>{run ? `${MONTHS[run.month - 1]} ${run.year} payroll` : "No payroll run"}</h3>
+                <div className="sub">{run ? `${run.items.length} people · ${run.status}` : "Create a run to start payroll"}</div></div>
+              <Link className="btn pri sm" href="/payroll">{run ? "Open run" : "Create run"}</Link>
             </div>
-            <Steps steps={PAYROLL_STEPS} current={run.status} />
+            {run ? <Steps steps={PAYROLL_STEPS} current={run.status} /> : <div className="empty">No payroll data yet.</div>}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, marginTop: 18 }}>
               <div><div className="mini">Gross</div>
-                <div className="num" style={{ fontSize: 19, fontWeight: 600 }}>{money(run.items.reduce((s, i) => s + i.gross, 0))}</div></div>
+                <div className="num" style={{ fontSize: 19, fontWeight: 600 }}>{money(run?.items.reduce((s, i) => s + i.gross, 0) || 0)}</div></div>
               <div><div className="mini">Tax &amp; deductions</div>
                 <div className="num" style={{ fontSize: 19, fontWeight: 600, color: "var(--rose)" }}>
-                  −{money(run.items.reduce((s, i) => s + i.tax + i.loan + i.unpaid, 0))}</div></div>
+                  −{money(run?.items.reduce((s, i) => s + i.tax + i.loan + i.unpaid, 0) || 0)}</div></div>
               <div><div className="mini">Net payable</div>
                 <div className="num" style={{ fontSize: 19, fontWeight: 600, color: "var(--jade)" }}>
-                  {money(run.items.reduce((s, i) => s + i.net, 0))}</div></div>
+                  {money(run?.items.reduce((s, i) => s + i.net, 0) || 0)}</div></div>
             </div>
             <div className="sep" />
-            <div className="mini">Danish Iqbal is excluded while suspended. Reinstate him before approval to include a part-month salary.</div>
+            <div className="mini">Payroll totals are calculated from the current employee and attendance records.</div>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ export default function DashboardPage() {
                 { l: "On leave", v: onLeave, c: "var(--brand)" },
                 { l: "Absent", v: absent, c: "var(--rose)" },
               ]}
-              center={[`${Math.round(((present + late) / 16) * 100)}%`, "IN OFFICE"]} />
+              center={[`${active ? Math.round(((present + late) / active) * 100) : 0}%`, "IN OFFICE"]} />
             <div className="legend" style={{ flexDirection: "column", gap: 9 }}>
               <span><i style={{ background: "var(--jade)" }} />On time <b className="num">{present}</b></span>
               <span><i style={{ background: "var(--amber)" }} />Late <b className="num">{late}</b></span>

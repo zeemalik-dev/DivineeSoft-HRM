@@ -246,7 +246,8 @@ export function RunDetailModal({ run }: { run: PayrollRun }) {
 /* --------------------------------- payslip ---------------------------------- */
 export function PayslipModal({ slip }: { slip: Payslip }) {
   const { money, closeModal, actions, data } = useStore();
-  const e = data.employees.find(x => x.id === slip.eid)!;
+  const e = data.employees.find(x => x.id === slip.eid);
+  if (!e) return <Frame title="Payslip unavailable" sub="The employee record for this payslip is no longer available.">No payslip details are available.</Frame>;
   const l = slip.line;
   const dept = data.departments.find(d => d.id === e.deptId)?.name;
   const earnings: [string, number][] = [

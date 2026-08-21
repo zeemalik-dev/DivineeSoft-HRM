@@ -26,23 +26,32 @@ export default function AssistantDrawer() {
   if (!aiOpen) return null;
 
   const buildContext = () => {
-    const run = data.payrolls.find(p => p.month === 8)!;
+    const run = data.payrolls.slice().sort((a, b) => b.year - a.year || b.month - a.month)[0];
     const visible = me.role === "Employee"
       ? data.employees.filter(e => e.id === me.id)
       : data.employees;
+    const visibleIds = new Set(visible.map(e => e.id));
+    const visibleLeaves = data.leaves.filter(l => visibleIds.has(l.eid));
+    const visibleAttendance = data.attendance.filter(a => visibleIds.has(a.eid));
+    const visibleTasks = data.tasks.filter(t => visibleIds.has(t.assignee));
+    const visiblePayslips = data.payslips.filter(p => visibleIds.has(p.eid));
     return [
       `TODAY: 19 August 2026. Company: Divineesoft Technologies, Lahore. Currency ${data.settings.currency}.`,
       `Signed in as ${fullName(me)} (${me.role}).`,
+      `DEPARTMENTS: ` + data.departments.map(d => `${d.name} (${d.code}), budget ${d.budget}, head ${fullName(data.employees.find(e => e.id === d.head))}`).join(" | "),
       `HEADCOUNT ${visible.length}: ` + visible.map(e =>
         `${fullName(e)} [${e.code}] ${e.desig}, ${data.departments.find(d => d.id === e.deptId)?.name}, ${e.type}, ${e.status}, gross ${grossOf(e)}, joined ${fmtDate(e.joined)}`).join(" | "),
-      `LEAVE: ` + data.leaves.map(l =>
+      `LEAVE: ` + visibleLeaves.map(l =>
         `${fullName(data.employees.find(e => e.id === l.eid))} ${l.type} ${fmtDate(l.from)}–${fmtDate(l.to)} ${l.status}`).join(" | "),
-      `PAYROLL: August run is ${run.status}, ${run.items.length} people, gross ${run.items.reduce((s, i) => s + i.gross, 0)}, net ${run.items.reduce((s, i) => s + i.net, 0)}. June and July are Paid.`,
+      `PAYROLL: ${run ? `${MONTHS[run.month - 1]} ${run.year} run is ${run.status}, ${run.items.length} people, gross ${run.items.reduce((s, i) => s + i.gross, 0)}, net ${run.items.reduce((s, i) => s + i.net, 0)}` : "There is no payroll run yet"}.`,
       `PROJECTS: ` + data.projects.map(p =>
         `${p.name} (${p.client}) ${p.status} ${p.progress}% due ${fmtDate(p.due)} budget ${p.budget} spent ${p.spent}`).join(" | "),
-      `TASKS: ` + data.tasks.map(t =>
+      `TASKS: ` + visibleTasks.map(t =>
         `${t.title} → ${fullName(data.employees.find(e => e.id === t.assignee))} ${t.status} due ${fmtDate(t.due)}`).join(" | "),
-      `ATTENDANCE: ${data.attendance.length} records this month, ${data.attendance.filter(a => a.status === "Late").length} late, ${data.attendance.filter(a => a.status === "Absent").length} absent.`,
+      `ATTENDANCE: ${visibleAttendance.length} records this month, ${visibleAttendance.filter(a => a.status === "Late").length} late, ${visibleAttendance.filter(a => a.status === "Absent").length} absent.`,
+      `PAYSLIPS: ${visiblePayslips.length} available, latest ${visiblePayslips.slice().sort((a, b) => b.year - a.year || b.month - a.month)[0]?.year || "none"}.`,
+      me.role === "Employee" ? "CONFIDENTIALITY: Only answer about the signed-in employee." :
+        `OPERATIONS: ${data.emails.length} email logs, ${data.audit.length} audit events, ${data.notifications.filter(n => !n.read).length} unread notifications.`,
     ].join("\n");
   };
 
@@ -57,8 +66,9 @@ export default function AssistantDrawer() {
         `${pending.length} requests are waiting — ${pending.map(l => fullName(data.employees.find(e => e.id === l.eid))).join(", ")}. Open Leave requests to decide.`;
     }
     if (s.includes("payroll") || s.includes("pay")) {
-      const r = data.payrolls.find(p => p.month === 8)!;
-      return `The August run is a ${r.status} covering ${r.items.length} people. Gross ${money(r.items.reduce((a, i) => a + i.gross, 0))}, net ${money(r.items.reduce((a, i) => a + i.net, 0))}. It moves through Processing, Pending Approval and Approved before you can mark it paid — payday is 31 August.`;
+      const r = data.payrolls.slice().sort((a, b) => b.year - a.year || b.month - a.month)[0];
+      if (!r) return "There is no payroll run yet. Open Payroll to create the first run.";
+      return `The latest run is ${MONTHS[r.month - 1]} ${r.year}, currently ${r.status}, covering ${r.items.length} people. Gross ${money(r.items.reduce((a, i) => a + i.gross, 0))}, net ${money(r.items.reduce((a, i) => a + i.net, 0))}.`;
     }
     if (s.includes("behind") || s.includes("project") || s.includes("late")) {
       const late = data.projects.filter(p => p.status !== "Completed" && p.due < TODAY);

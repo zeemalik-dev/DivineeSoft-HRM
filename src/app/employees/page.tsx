@@ -11,6 +11,13 @@ import { NewEmployeeModal, StatusModal } from "@/components/modals/Modals";
 import { fullName, fmtDate } from "@/lib/format";
 import { grossOf } from "@/lib/seed";
 
+function downloadCsv(filename: string, rows: string[][]) {
+  const csv = rows.map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n");
+  const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  const link = document.createElement("a");
+  link.href = url; link.download = filename; link.click(); URL.revokeObjectURL(url);
+}
+
 function EmployeesInner() {
   const { data, money, openModal, toast } = useStore();
   const { departmentName } = useLookups();
@@ -34,7 +41,13 @@ function EmployeesInner() {
       <PageHead eyebrow="HR management" title="People"
         sub={`${data.employees.length} on the books · ${data.employees.filter(e => e.status === "Active").length} active · ${data.employees.filter(e => e.type !== "Full Time").length} on non-permanent contracts`}
         actions={<>
-          <button className="btn" onClick={() => toast("Exporting people — the file will download shortly")}>Export CSV</button>
+          <button className="btn" onClick={() => {
+            downloadCsv("divineesoft-employees.csv", [
+              ["Name", "Employee ID", "Email", "Department", "Designation", "Contract", "Status", "Monthly Gross"],
+              ...rows.map(e => [fullName(e), e.code, e.email, departmentName(e.deptId), e.desig, e.type, e.status, String(grossOf(e))]),
+            ]);
+            toast(`${rows.length} employees exported`);
+          }}>Export CSV</button>
           <button className="btn pri" onClick={() => openModal(<NewEmployeeModal />)}>Add person</button>
         </>} />
 

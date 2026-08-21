@@ -54,7 +54,8 @@ export default function TasksPage() {
               <span className="n num">{list.filter(t => t.status === status).length}</span>
             </div>
             {list.filter(t => t.status === status).map(t => {
-              const e = employeeById(t.assignee)!;
+              const e = employeeById(t.assignee);
+              if (!e) return null;
               const late = t.due < TODAY && t.status !== "Completed";
               return (
                 <div key={t.id} className="tcard" draggable

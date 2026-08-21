@@ -48,7 +48,8 @@ export default function ProjectsPage() {
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div style={{ display: "flex" }}>
                     {p.team.slice(0, 5).map((id, k) => {
-                      const e = data.employees.find(x => x.id === id)!;
+                      const e = data.employees.find(x => x.id === id);
+                      if (!e) return null;
                       return <div key={id} className="avatar sm"
                         style={{ background: e.color, marginLeft: k ? -7 : 0, border: "2px solid var(--panel)" }}>{initials(e)}</div>;
                     })}
