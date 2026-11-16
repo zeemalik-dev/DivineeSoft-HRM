@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="MDViewer (mdviewer.in)">
+<title>HRM Audit</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css" crossorigin="anonymous">
+<style>
+:root { color-scheme: light; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; max-width: 820px; margin: 0 auto; padding: 2rem 1.25rem; color: #1a1a1a; line-height: 1.7; background: #fff; }
+h1, h2, h3, h4, h5, h6 { line-height: 1.25; margin: 1.6em 0 0.6em; break-after: avoid; }
+h1 { font-size: 2em; border-bottom: 1px solid #e4e4e7; padding-bottom: .3em; }
+h2 { font-size: 1.5em; border-bottom: 1px solid #e4e4e7; padding-bottom: .3em; }
+p, ul, ol, blockquote, pre, table, figure { margin: 0 0 1em; }
+a { color: #2563eb; }
+img, svg { max-width: 100%; height: auto; }
+pre { background: #f6f8fa; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: .875rem; line-height: 1.5; break-inside: avoid; white-space: pre-wrap; word-break: break-word; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em; }
+:not(pre) > code { background: #f4f4f5; padding: .15em .4em; border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d4d4d8; padding: 6px 12px; }
+th { background: #f4f4f5; font-weight: 600; }
+tr { break-inside: avoid; }
+blockquote { border-left: 4px solid #d4d4d8; padding: .25em 1em; color: #52525b; margin-left: 0; }
+hr { border: none; border-top: 1px solid #d4d4d8; margin: 2em 0; }
+ul.contains-task-list { list-style: none; padding-left: 1.2em; }
+figure { text-align: center; break-inside: avoid; }
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+.hljs-comment, .hljs-quote { color: #6a737d; }
+.hljs-keyword, .hljs-selector-tag, .hljs-type { color: #d73a49; }
+.hljs-string, .hljs-attr, .hljs-regexp { color: #032f62; }
+.hljs-number, .hljs-literal, .hljs-variable, .hljs-built_in { color: #005cc5; }
+.hljs-title, .hljs-section, .hljs-function { color: #6f42c1; }
+.hljs-name, .hljs-tag { color: #22863a; }
+[data-block-error] { border: 1px solid #fca5a5; background: #fef2f2; padding: .5em 1em; border-radius: 6px; }
+@media print { body { padding: 0; max-width: none; } a { color: inherit; } pre { border: 1px solid #e4e4e7; } }
+</style>
+</head>
+<body>
+<article>
+<h1>DivineeSoft HRM: Task &amp; Subtask System Audit Report</h1>
+<p><strong>Target Audience:</strong> Product Owners, Project Stakeholders, and Clients<br>
+<strong>System Area:</strong> Task Register, Subtasks / Action Items, My Tasks Board, and Calendar Workflows<br>
+<strong>Date:</strong> November 2026<br>
+<strong>Status:</strong> Action Required Before Production Release</p>
+<hr>
+<h2>Executive Summary</h2>
+<p>A comprehensive quality, security, and usability review was conducted on the <strong>Task &amp; Subtask Management System</strong> in DivineeSoft HRM.</p>
+<p>While the core functionality (creating tasks, breaking work into action items, assigning contributors, and tracking status) provides a solid foundation, the audit identified <strong>12 key issues</strong> across four categories:</p>
+<ol>
+<li><strong>Data Loss &amp; Frustration Bugs:</strong> Scenarios where user edits, dates, or checklist items are unintentionally lost or modified by the system.</li>
+<li><strong>Access Control &amp; Permissions Gaps:</strong> Inconsistencies where assignees are blocked from updating their own items, or unauthorized users have excessive deletion power.</li>
+<li><strong>Workflow &amp; Progress Inconsistencies:</strong> Disconnects where task progress percentages and completion states fall out of sync with checklist items.</li>
+<li><strong>User Experience &amp; Interface Polish:</strong> Visual badges missing from views, sticky form fields, and shared note inputs causing accidental cross-task contamination.</li>
+</ol>
+<p>None of these issues require a rebuild of the application. They can all be resolved with focused refinements to the business rules and user interface components.</p>
+<hr>
+<h2>Overall System Health Score</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="overflow-x-auto" data-table-wrapper="true"><table><thead><tr><th style="text-align: left;">Category</th><th style="text-align: center;">Health</th><th style="text-align: center;">Status</th><th style="text-align: left;">Summary</th></tr></thead><tbody><tr><td style="text-align: left;"><strong>Security &amp; Permissions</strong></td><td style="text-align: center;">⚠️ Moderate</td><td style="text-align: center;">Needs Refinement</td><td style="text-align: left;">Subtask assignees are blocked from checking their own work; task deletion rules need tightening.</td></tr><tr><td style="text-align: left;"><strong>Data Integrity &amp; Sync</strong></td><td style="text-align: center;">⚠️ Moderate</td><td style="text-align: center;">Needs Refinement</td><td style="text-align: left;">Progress calculation can desynchronize from task status; timezone conversion shifts dates.</td></tr><tr><td style="text-align: left;"><strong>User Experience (UX)</strong></td><td style="text-align: center;">⚠️ Fair</td><td style="text-align: center;">Polish Required</td><td style="text-align: left;">Edit dialog has a typing reset glitch; checklist badge missing from the main table.</td></tr><tr><td style="text-align: left;"><strong>Core Usability</strong></td><td style="text-align: center;">✅ Good</td><td style="text-align: center;">Functional</td><td style="text-align: left;">Task creation, project linking, prioritization, and board layouts work as intended.</td></tr></tbody></table></div>
+<hr>
+<h2>1. High-Priority Issues (Immediate Action Required)</h2>
+<h3>1.1 The "Typing Reset" Glitch in Task Edit Dialog</h3>
+<ul>
+<li><strong>Where It Happens:</strong> When clicking "Edit" on a task from the Task Register.</li>
+<li><strong>What the User Experiences:</strong> A user opens the task edit window and starts typing notes or editing the title. Within half a second, the window suddenly flashes and wipes out whatever the user was typing, resetting the form back to its original state.</li>
+<li><strong>Why It Matters:</strong> High frustration and data loss. Users lose their typed thoughts and feel the application is unstable or laggy.</li>
+<li><strong>What Causes It:</strong> The window loads basic task info immediately, but fetches detailed updates a split second later in the background. When the background data arrives, it forces the entire window to re-initialize and discard active typing.</li>
+<li><strong>Recommended Solution:</strong> Load all necessary details before displaying the edit form, or lock the form fields so background refreshes never overwrite active user input.</li>
+</ul>
+<hr>
+<h3>1.2 Team Members Blocked from Checking Off Their Own Subtasks</h3>
+<ul>
+<li><strong>Where It Happens:</strong> When a team member attempts to check off a subtask assigned to them.</li>
+<li><strong>What the User Experiences:</strong> If Manager A creates a task and delegates Subtask 1 to Employee B, Employee B sees an error message: <em>"You can only change tasks you own or manage"</em> when clicking the completion checkbox.</li>
+<li><strong>Why It Matters:</strong> Defeats the core purpose of delegating subtasks. Team members cannot report completed work themselves; only the manager can check off items.</li>
+<li><strong>What Causes It:</strong> The security check verifies whether the employee has edit rights to the <strong>entire parent task</strong>, rather than recognizing that they are the assigned owner of that specific action item.</li>
+<li><strong>Recommended Solution:</strong> Allow any employee explicitly assigned to a subtask to mark that subtask complete or incomplete.</li>
+</ul>
+<hr>
+<h3>1.3 Subtask Checklist Badge Missing from the Task Register Table</h3>
+<ul>
+<li><strong>Where It Happens:</strong> In the main Task Register list view.</li>
+<li><strong>What the User Experiences:</strong> In the Task Register table, tasks that contain subtasks do not show any indicator or badge (e.g., <code>2/5 checklist done</code>). The column shows only the task title and project.</li>
+<li><strong>Why It Matters:</strong> Managers and team leads cannot see which tasks have checklists or their completion rate without opening each task one by one.</li>
+<li><strong>What Causes It:</strong> The badge was designed in the user interface, but the data pipeline that populates the live table inadvertently drops the subtask list during data transfer.</li>
+<li><strong>Recommended Solution:</strong> Ensure the live table data includes subtask counts and completion ratios so the progress badge displays properly.</li>
+</ul>
+<hr>
+<h3>1.4 Date Shifting Backward by One Day Across Timezones</h3>
+<ul>
+<li><strong>Where It Happens:</strong> When setting task start dates and deadlines in local company timezones.</li>
+<li><strong>What the User Experiences:</strong> A user schedules a task for November 17. After saving and reopening the task later, the start date has shifted to November 16. Saving again moves it to November 15.</li>
+<li><strong>Why It Matters:</strong> Causes scheduling errors, missed deadlines, and calendar discrepancies across the team.</li>
+<li><strong>What Causes It:</strong> When dates are saved, midnight local time is converted to Universal Coordinated Time (UTC). In timezones east of UTC, this converts to the prior evening. When loaded back into the calendar, the application reads the UTC day instead of the original local day.</li>
+<li><strong>Recommended Solution:</strong> Store and display calendar dates using company-local calendar day values rather than raw UTC timestamps.</li>
+</ul>
+<hr>
+<h2>2. Business Logic &amp; Workflow Gaps</h2>
+<h3>2.1 Progress Percentage vs. Status Desynchronization</h3>
+<ul>
+<li><strong>What Happens:</strong>
+<ol>
+<li>If a task has 4 subtasks and all 4 are checked off, the task automatically marks itself as <strong>Completed (100%)</strong>.</li>
+<li>If the user realizes one item was checked by mistake and unchecks it, the progress drops to <strong>75%</strong>, but the task status <strong>remains marked as "Completed"</strong>.</li>
+<li>Conversely, if a user clicks "Mark complete" directly on the parent task, progress sets to 100%, but all individual subtasks remain unchecked (<code>0 of 4 done</code>).</li>
+</ol>
+</li>
+<li><strong>Why It Matters:</strong> Confusing and conflicting reporting. Reports show tasks marked "Completed" with incomplete checklists, or tasks marked "In Progress" with 100% progress.</li>
+<li><strong>Recommended Solution:</strong>
+<ul>
+<li>When a subtask is unchecked on a completed task, prompt or automatically adjust status back to <code>In Progress</code>.</li>
+<li>When a user marks a task complete directly, offer to auto-complete remaining subtasks.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>2.2 Delegated Subtasks Not Visible on Personal "My Tasks" Boards</h3>
+<ul>
+<li><strong>What Happens:</strong> When an employee visits their personal command center ("My Tasks"), they only see tasks where they are the <strong>primary task owner</strong>. If they have been assigned action items under a project task owned by someone else, those items do not appear on their board.</li>
+<li><strong>What Happens to the CEO:</strong> The CEO's board currently only retrieves private personal tasks, filtering out regular business tasks assigned to the CEO.</li>
+<li><strong>Why It Matters:</strong> Team members lose track of work assigned to them. Managers assume employees see their delegated checklist items, while employees have no central visibility of them.</li>
+<li><strong>Recommended Solution:</strong> Update the personal board query so employees see both tasks they own and tasks containing subtasks assigned to them.</li>
+</ul>
+<hr>
+<h3>2.3 Regular Assignees Can Permanently Delete Entire Tasks</h3>
+<ul>
+<li><strong>What Happens:</strong> Any employee assigned to a task has the ability to permanently delete the entire task via API actions, wiping out all subtasks, historical updates, and calendar blocks.</li>
+<li><strong>Why It Matters:</strong> Accidental or unauthorized deletion of business records. In an HR/Operations system, task deletion should be restricted to managers, project leads, or the creator of the task.</li>
+<li><strong>Recommended Solution:</strong> Allow assignees to update progress, add comments, and complete tasks, but restrict task deletion strictly to Management and the original task author.</li>
+</ul>
+<hr>
+<h2>3. User Experience &amp; Interface Polish</h2>
+<h3>3.1 Notes &amp; Comments Shared Across Cards on the Task Board</h3>
+<ul>
+<li><strong>What Happens:</strong> On the Kanban / Task Board, if a user opens Task A, types a blocker note or comment, and then opens Task B, the draft text from Task A remains in the input field on Task B.</li>
+<li><strong>Why It Matters:</strong> High risk of posting confidential or incorrect comments to the wrong task card.</li>
+<li><strong>Recommended Solution:</strong> Keep form inputs isolated to each individual task card so text typed on one card never leaks into another.</li>
+</ul>
+<hr>
+<h3>3.2 Inability to Rename Existing Subtasks in the Edit Dialog</h3>
+<ul>
+<li><strong>What Happens:</strong> In the Task Edit dialog, existing subtasks can have their completion toggled, assignee changed, or deadline updated, but the title text itself cannot be edited.</li>
+<li><strong>Why It Matters:</strong> If someone makes a typo or wants to clarify a checklist item, they are forced to delete the item and recreate it from scratch.</li>
+<li><strong>Recommended Solution:</strong> Provide an editable text field or inline edit button for subtask titles.</li>
+</ul>
+<hr>
+<h3>3.3 Subtask Assignee Dropdown Sticking to Previous Selection</h3>
+<ul>
+<li><strong>What Happens:</strong> When creating a task with multiple subtasks, assigning Employee A to the first subtask leaves Employee A selected for the next subtask.</li>
+<li><strong>Why It Matters:</strong> Subsequent checklist items get inadvertently assigned to Employee A unless the user manually resets the dropdown each time.</li>
+<li><strong>Recommended Solution:</strong> Automatically reset the subtask assignee dropdown to "Unassigned" after each item is added to the list.</li>
+</ul>
+<hr>
+<h3>3.4 Missing Visual Feedback When Toggling Subtasks</h3>
+<ul>
+<li><strong>What Happens:</strong> When clicking a subtask checkbox on the board or in the calendar view, there is a 300–500 millisecond delay before the checkmark appears or line-through activates, with no loading spinner.</li>
+<li><strong>Why It Matters:</strong> Users assume the click did not register and click again, leading to double-toggles or frustration.</li>
+<li><strong>Recommended Solution:</strong> Implement instant visual feedback (optimistic update) so the checkbox ticks immediately while the server saves in the background.</li>
+</ul>
+<hr>
+<h2>4. Prioritized Action &amp; Implementation Plan</h2>
+<figure class="not-prose my-6 rounded-lg border border-border bg-card" data-mermaid-block="true"><div class="overflow-auto p-4" aria-label="Diagram (scrollable)"><div class="mx-auto [&amp;_svg]:h-auto [&amp;_svg]:max-w-full" data-mermaid-svg="true"><svg id="mermaid-r7" width="100%" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 1750.75px;" viewBox="4 4 1750.75 408" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-r7{font-family:inherit;font-size:16px;fill:#ccc;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-r7 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-r7 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-r7 .error-icon{fill:#a44141;}#mermaid-r7 .error-text{fill:#ddd;stroke:#ddd;}#mermaid-r7 .edge-thickness-normal{stroke-width:1px;}#mermaid-r7 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-r7 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-r7 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-r7 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-r7 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-r7 .marker{fill:lightgrey;stroke:lightgrey;}#mermaid-r7 .marker.cross{stroke:lightgrey;}#mermaid-r7 svg{font-family:inherit;font-size:16px;}#mermaid-r7 p{margin:0;}#mermaid-r7 .label{font-family:inherit;color:#ccc;}#mermaid-r7 .cluster-label text{fill:#F9FFFE;}#mermaid-r7 .cluster-label span{color:#F9FFFE;}#mermaid-r7 .cluster-label span p{background-color:transparent;}#mermaid-r7 .label text,#mermaid-r7 span{fill:#ccc;color:#ccc;}#mermaid-r7 .node rect,#mermaid-r7 .node circle,#mermaid-r7 .node ellipse,#mermaid-r7 .node polygon,#mermaid-r7 .node path{fill:#1f2020;stroke:#ccc;stroke-width:1px;}#mermaid-r7 .rough-node .label text,#mermaid-r7 .node .label text,#mermaid-r7 .image-shape .label,#mermaid-r7 .icon-shape .label{text-anchor:middle;}#mermaid-r7 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-r7 .rough-node .label,#mermaid-r7 .node .label,#mermaid-r7 .image-shape .label,#mermaid-r7 .icon-shape .label{text-align:center;}#mermaid-r7 .node.clickable{cursor:pointer;}#mermaid-r7 .root .anchor path{fill:lightgrey!important;stroke-width:0;stroke:lightgrey;}#mermaid-r7 .arrowheadPath{fill:lightgrey;}#mermaid-r7 .edgePaths .path{stroke:lightgrey;stroke-width:1px;}#mermaid-r7 .flowchart-link{stroke:lightgrey;fill:none;}#mermaid-r7 .edgeLabel{background-color:hsl(0, 0%, 34.4117647059%);text-align:center;}#mermaid-r7 .edgeLabel p{background-color:hsl(0, 0%, 34.4117647059%);}#mermaid-r7 .edgeLabel rect{opacity:0.5;background-color:hsl(0, 0%, 34.4117647059%);fill:hsl(0, 0%, 34.4117647059%);}#mermaid-r7 .labelBkg{background-color:rgba(87.75, 87.75, 87.75, 0.5);}#mermaid-r7 .cluster rect{fill:hsl(180, 1.5873015873%, 28.3529411765%);stroke:rgba(255, 255, 255, 0.25);stroke-width:1px;}#mermaid-r7 .cluster text{fill:#F9FFFE;}#mermaid-r7 .cluster span{color:#F9FFFE;}#mermaid-r7 .node .collapsed-indicator{fill:rgba(255, 255, 255, 0.25);stroke:none;opacity:0.6;}#mermaid-r7 .node .collapsed-separator{stroke:rgba(255, 255, 255, 0.25);stroke-width:0.75px;}#mermaid-r7 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:inherit;font-size:12px;background:hsl(20, 1.5873015873%, 12.3529411765%);border:1px solid rgba(255, 255, 255, 0.25);border-radius:2px;pointer-events:none;z-index:100;}#mermaid-r7 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#ccc;}#mermaid-r7 rect.text{fill:none;stroke-width:0;}#mermaid-r7 .icon-shape,#mermaid-r7 .image-shape{background-color:hsl(0, 0%, 34.4117647059%);text-align:center;}#mermaid-r7 .icon-shape p,#mermaid-r7 .image-shape p{background-color:hsl(0, 0%, 34.4117647059%);padding:2px;}#mermaid-r7 .icon-shape .label rect,#mermaid-r7 .image-shape .label rect{opacity:0.5;background-color:hsl(0, 0%, 34.4117647059%);fill:hsl(0, 0%, 34.4117647059%);}#mermaid-r7 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-r7 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-r7 .node .neo-node{stroke:#ccc;}#mermaid-r7 [data-look="neo"].node rect,#mermaid-r7 [data-look="neo"].cluster rect,#mermaid-r7 [data-look="neo"].node polygon{stroke:url(#mermaid-r7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-r7 [data-look="neo"].swimlane.cluster rect{filter:none;}#mermaid-r7 [data-look="neo"].node path{stroke:url(#mermaid-r7-gradient);stroke-width:1px;}#mermaid-r7 [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-r7 [data-look="neo"].node .neo-line path{stroke:#ccc;filter:none;}#mermaid-r7 [data-look="neo"].node circle{stroke:url(#mermaid-r7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-r7 [data-look="neo"].node circle .state-start{fill:#000000;}#mermaid-r7 [data-look="neo"].icon-shape .icon{fill:url(#mermaid-r7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-r7 [data-look="neo"].icon-shape .icon-neo path{stroke:url(#mermaid-r7-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#mermaid-r7 :root{--mermaid-font-family:inherit;}</style><g><marker id="mermaid-r7_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-r7_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-r7_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-r7_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="mermaid-r7_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-r7_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-r7_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-r7_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-r7_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-r7_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-r7_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="mermaid-r7_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edges edgePaths"><path d="M823,60L823,72.92893218813452Q823,80 815.9289321881345,80L287.0710678118655,80Q280,80 280,87.07106781186548L280,114" id="mermaid-r7-L_A_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 587.6717529296875 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_A_B_0" data-points="W3sieCI6ODIzLCJ5Ijo2MH0seyJ4Ijo4MjMsInkiOjgwfSx7IngiOjI4MCwieSI6ODB9LHsieCI6MjgwLCJ5IjoxMTh9XQ==" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M856,60L856,96" id="mermaid-r7-L_A_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 32 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_A_C_0" data-points="W3sieCI6ODU2LCJ5Ijo2MH0seyJ4Ijo4NTYsInkiOjEwMH1d" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M889,60L889,72.92893218813452Q889,80 896.0710678118655,80L1461.4562759381345,80Q1468.52734375,80 1468.52734375,87.07106781186548L1468.52734375,96" id="mermaid-r7-L_A_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 606.1990356445312 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_A_D_0" data-points="W3sieCI6ODg5LCJ5Ijo2MH0seyJ4Ijo4ODksInkiOjgwfSx7IngiOjE0NjguNTI3MzQzNzUsInkiOjgwfSx7IngiOjE0NjguNTI3MzQzNzUsInkiOjEwMH1d" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M247,214L247,232.92893218813452Q247,240 239.92893218813452,240L95.07106781186548,240Q88,240 88,247.07106781186548L88,256" id="mermaid-r7-L_B_B1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 191.6717071533203 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_B_B1_0" data-points="W3sieCI6MjQ3LCJ5IjoyMTR9LHsieCI6MjQ3LCJ5IjoyNDB9LHsieCI6ODgsInkiOjI0MH0seyJ4Ijo4OCwieSI6MjYwfV0=" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M280,214L280,256" id="mermaid-r7-L_B_B2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 38 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_B_B2_0" data-points="W3sieCI6MjgwLCJ5IjoyMTR9LHsieCI6MjgwLCJ5IjoyNjB9XQ==" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M313,214L313,232.92893218813452Q313,240 320.0710678118655,240L464.9289321881345,240Q472,240 472,247.07106781186548L472,256" id="mermaid-r7-L_B_B3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 191.67172241210938 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_B_B3_0" data-points="W3sieCI6MzEzLCJ5IjoyMTR9LHsieCI6MzEzLCJ5IjoyNDB9LHsieCI6NDcyLCJ5IjoyNDB9LHsieCI6NDcyLCJ5IjoyNjB9XQ==" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M823,220L823,232.92893218813452Q823,240 815.9289321881345,240L671.0710678118655,240Q664,240 664,247.07106781186548L664,256" id="mermaid-r7-L_C_C1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 185.67172241210938 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_C_C1_0" data-points="W3sieCI6ODIzLCJ5IjoyMjB9LHsieCI6ODIzLCJ5IjoyNDB9LHsieCI6NjY0LCJ5IjoyNDB9LHsieCI6NjY0LCJ5IjoyNjB9XQ==" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M856,220L856,256" id="mermaid-r7-L_C_C2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 32 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_C_C2_0" data-points="W3sieCI6ODU2LCJ5IjoyMjB9LHsieCI6ODU2LCJ5IjoyNjB9XQ==" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M889,220L889,232.92893218813452Q889,240 896.0710678118655,240L1054.0812759381345,240Q1061.15234375,240 1061.15234375,247.07106781186548L1061.15234375,256" id="mermaid-r7-L_C_C3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 198.82403564453125 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_C_C3_0" data-points="W3sieCI6ODg5LCJ5IjoyMjB9LHsieCI6ODg5LCJ5IjoyNDB9LHsieCI6MTA2MS4xNTIzNDM3NSwieSI6MjQwfSx7IngiOjEwNjEuMTUyMzQzNzUsInkiOjI2MH1d" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M1435.52734375,220L1435.52734375,232.92893218813452Q1435.52734375,240 1428.4562759381345,240L1273.3757553118655,240Q1266.3046875,240 1266.3046875,247.07106781186548L1266.3046875,256" id="mermaid-r7-L_D_D1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 195.89437866210938 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_D_D1_0" data-points="W3sieCI6MTQzNS41MjczNDM3NSwieSI6MjIwfSx7IngiOjE0MzUuNTI3MzQzNzUsInkiOjI0MH0seyJ4IjoxMjY2LjMwNDY4NzUsInkiOjI0MH0seyJ4IjoxMjY2LjMwNDY4NzUsInkiOjI2MH1d" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M1468.52734375,220L1468.52734375,256" id="mermaid-r7-L_D_D2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 32 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_D_D2_0" data-points="W3sieCI6MTQ2OC41MjczNDM3NSwieSI6MjIwfSx7IngiOjE0NjguNTI3MzQzNzUsInkiOjI2MH1d" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path><path d="M1501.52734375,220L1501.52734375,232.92893218813452Q1501.52734375,240 1508.5984115618655,240L1663.6789321881345,240Q1670.75,240 1670.75,247.07106781186548L1670.75,256" id="mermaid-r7-L_D_D3_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="stroke-dasharray: 0 0 195.8944091796875 4; stroke-dashoffset: 0;;" data-edge="true" data-et="edge" data-id="L_D_D3_0" data-points="W3sieCI6MTUwMS41MjczNDM3NSwieSI6MjIwfSx7IngiOjE1MDEuNTI3MzQzNzUsInkiOjI0MH0seyJ4IjoxNjcwLjc1LCJ5IjoyNDB9LHsieCI6MTY3MC43NSwieSI6MjYwfV0=" data-look="neo" marker-end="url(#mermaid-r7_flowchart-v2-pointEnd-margin)"></path></g><g class="edgeLabels"></g><g class="nodes"><g class="node default" id="mermaid-r7-flowchart-A-0" data-look="neo" transform="translate(856, 36)"><rect class="basic label-container" style="" x="-76" y="-24" width="152" height="48"></rect><g class="label" style="" transform="translate(-60, -12)"><rect></rect><foreignObject width="120" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: nowrap; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Audit Findings</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-B-1" data-look="neo" transform="translate(280, 166)"><rect class="basic label-container" style="" x="-76" y="-48" width="152" height="96"></rect><g class="label" style="" transform="translate(-60, -36)"><rect></rect><foreignObject width="120" height="72"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Phase 1: Quick Fixes (1-2 Days)</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-C-3" data-look="neo" transform="translate(856, 160)"><rect class="basic label-container" style="" x="-76" y="-60" width="152" height="120"></rect><g class="label" style="" transform="translate(-60, -48)"><rect></rect><foreignObject width="120" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Phase 2: Workflow &amp; Permissions (2-3 Days)</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-D-5" data-look="neo" transform="translate(1468.52734375, 160)"><rect class="basic label-container" style="" x="-76" y="-60" width="152" height="120"></rect><g class="label" style="" transform="translate(-60, -48)"><rect></rect><foreignObject width="120" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Phase 3: UX &amp; Dashboard Polish (1-2 Days)</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-B1-7" data-look="neo" transform="translate(88, 296)"><rect class="basic label-container" style="" x="-76" y="-36" width="152" height="72"></rect><g class="label" style="" transform="translate(-60, -24)"><rect></rect><foreignObject width="120" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Fix Edit Modal Typing Reset</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-B2-9" data-look="neo" transform="translate(280, 320)"><rect class="basic label-container" style="" x="-76" y="-60" width="152" height="120"></rect><g class="label" style="" transform="translate(-60, -48)"><rect></rect><foreignObject width="120" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Restore Checklist Badge on Main Table</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-B3-11" data-look="neo" transform="translate(472, 308)"><rect class="basic label-container" style="" x="-76" y="-48" width="152" height="96"></rect><g class="label" style="" transform="translate(-60, -36)"><rect></rect><foreignObject width="120" height="72"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Fix Date Shifting Timezone Bug</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-C1-13" data-look="neo" transform="translate(664, 320)"><rect class="basic label-container" style="" x="-76" y="-60" width="152" height="120"></rect><g class="label" style="" transform="translate(-60, -48)"><rect></rect><foreignObject width="120" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Allow Subtask Assignees to Check Off Items</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-C2-15" data-look="neo" transform="translate(856, 320)"><rect class="basic label-container" style="" x="-76" y="-60" width="152" height="120"></rect><g class="label" style="" transform="translate(-60, -48)"><rect></rect><foreignObject width="120" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Synchronize Subtask Progress with Task Status</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-C3-17" data-look="neo" transform="translate(1061.15234375, 308)"><rect class="basic label-container" style="" x="-89.15234375" y="-48" width="178.3046875" height="96"></rect><g class="label" style="" transform="translate(-73.15234375, -36)"><rect></rect><foreignObject width="146.3046875" height="72"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Restrict Task Deletion to Managers/Creators</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-D1-19" data-look="neo" transform="translate(1266.3046875, 332)"><rect class="basic label-container" style="" x="-76" y="-72" width="152" height="144"></rect><g class="label" style="" transform="translate(-60, -60)"><rect></rect><foreignObject width="120" height="120"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Show Delegated Subtasks on Personal Boards</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-D2-21" data-look="neo" transform="translate(1468.52734375, 320)"><rect class="basic label-container" style="" x="-86.22265625" y="-60" width="172.4453125" height="120"></rect><g class="label" style="" transform="translate(-70.22265625, -48)"><rect></rect><foreignObject width="140.4453125" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Isolate Comment/Blocker Inputs per Task Card</p></span></div></foreignObject></g></g><g class="node default" id="mermaid-r7-flowchart-D3-23" data-look="neo" transform="translate(1670.75, 320)"><rect class="basic label-container" style="" x="-76" y="-60" width="152" height="120"></rect><g class="label" style="" transform="translate(-60, -48)"><rect></rect><foreignObject width="120" height="96"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 120px; text-align: center; width: 120px;"><span class="nodeLabel"><p>Allow Subtask Title Renaming &amp; Optimistic Toggling</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="mermaid-r7-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#FFFFFF"></feDropShadow></filter></defs><defs><filter id="mermaid-r7-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#FFFFFF"></feDropShadow></filter></defs><linearGradient id="mermaid-r7-gradient" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#cccccc" stop-opacity="1"></stop><stop offset="100%" stop-color="hsl(180, 0%, 18.3529411765%)" stop-opacity="1"></stop></linearGradient></svg></div></div></figure>
+<h3>Phase 1: High-Impact Stability Fixes (Estimated: 1–2 Days)</h3>
+<ol>
+<li><strong>Fix Edit Modal Input Wiping:</strong> Prevent background data refetching from clearing user input in <code>TaskEditModal.tsx</code>.</li>
+<li><strong>Restore Subtask Badges:</strong> Map subtask counts in <code>TaskClient.tsx</code> so the register table shows <code>{completed}/{total}</code> badges.</li>
+<li><strong>Resolve Timezone Date Drift:</strong> Standardize dates to company timezone calendar days across <code>TaskComposer.tsx</code> and <code>TaskEditModal.tsx</code>.</li>
+</ol>
+<h3>Phase 2: Permissions &amp; Workflow Synchronization (Estimated: 2–3 Days)</h3>
+<ol start="4">
+<li><strong>Enable Subtask Assignee Completion:</strong> Permit assigned employees to toggle subtask status in <code>[id]/route.ts</code>.</li>
+<li><strong>Harmonize Status &amp; Progress Rules:</strong> Auto-reopen completed tasks if subtasks are unchecked, and handle full completions gracefully.</li>
+<li><strong>Protect Against Unauthorized Deletions:</strong> Guard <code>DELETE /api/tasks/[id]</code> so only Managers and Creators can remove tasks.</li>
+<li><strong>Cross-Task Subtask ID Isolation:</strong> Ensure subtask edits cannot accidentally reference or update subtasks from other tasks.</li>
+</ol>
+<h3>Phase 3: Dashboard &amp; Usability Polish (Estimated: 1–2 Days)</h3>
+<ol start="8">
+<li><strong>Personal Board Subtask Visibility:</strong> Include delegated action items on employee personal dashboards.</li>
+<li><strong>Card State Isolation on Task Board:</strong> Make comments and blocker fields private to each task card.</li>
+<li><strong>Inline Subtask Title Editing:</strong> Allow title editing for existing subtasks in the modal.</li>
+<li><strong>Instant Checkbox Feedback:</strong> Add optimistic UI updates on subtask check action.</li>
+</ol>
+<hr>
+<h2>Conclusion &amp; Business Value</h2>
+<p>Addressing these items will transition the Task &amp; Subtask module from a functioning prototype to an enterprise-grade workflow tool. The improvements will:</p>
+<ul>
+<li><strong>Eliminate user frustration</strong> caused by lost form data and shifting calendar dates.</li>
+<li><strong>Empower team members</strong> to manage and report on their delegated responsibilities without administrative bottlenecks.</li>
+<li><strong>Provide management with reliable, accurate project visibility</strong> where task statuses match checklist reality.</li>
+</ul>
+</article>
+</body>
+</html>
